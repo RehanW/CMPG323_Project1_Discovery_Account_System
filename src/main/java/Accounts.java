@@ -10,8 +10,6 @@ public class Accounts {
     System.out.println("First line of code for my project!!");
     
     try {
-  
-      //Class.forName()
       
       Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/accounts",
               "Eclipse", "Rehan@405170");
