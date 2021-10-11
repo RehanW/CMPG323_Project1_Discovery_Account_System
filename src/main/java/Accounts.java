@@ -131,6 +131,10 @@ public class Accounts {
           }
           break;
         }
+        case "0":{
+          System.out.println("Thank you see you next time!");
+          System.exit(1);
+        }
         default:
           System.out.println("Invalid choice or input");
           break;
