@@ -10,10 +10,10 @@ public class Accounts {
   
     System.out.println("First line of code for my project!!");
     Scanner sc = new Scanner(System.in);
-    String login_name = "";
-    String login_pass = "";
-    String username = "";
-    String action_choice = "";
+    String login_name;
+    String login_pass;
+    String username;
+    String action_choice;
     int miles_to_add;
     int miles_to_subtract;
     boolean name_logged = false;
