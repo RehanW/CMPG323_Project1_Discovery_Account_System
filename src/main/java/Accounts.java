@@ -7,8 +7,7 @@ import java.util.Scanner;
 public class Accounts {
   
   public static void main(String[] args) {
-  
-    System.out.println("First line of code for my project!!");
+    
     Scanner sc = new Scanner(System.in);
     String login_name;
     String login_pass;
