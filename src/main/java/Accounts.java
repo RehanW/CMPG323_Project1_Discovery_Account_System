@@ -44,7 +44,6 @@ public class Accounts {
             } else {
               System.out.println("Invalid username, please try again\n");
               login_name = sc.nextLine();
-              continue;
             }
           }catch (Exception e){
             e.printStackTrace();
@@ -63,7 +62,6 @@ public class Accounts {
           } else {
             System.out.println("Invalid password, please try again\n");
             login_pass = sc.nextLine();
-            continue;
           }
         }
         
