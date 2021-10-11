@@ -75,66 +75,68 @@ public class Accounts {
                                  "current miles, 'add' to add newly gained miles to your account " +
                                  "or 'withdraw' to withdraw miles for rewards\n");
       action_choice = sc.nextLine();
-      
-      if(action_choice.toLowerCase().equals("view")){
-        System.out.println("Please enter username:\n");
-        username = sc.nextLine();
-        String sql_view_miles = "SELECT * FROM miles WHERE user_name = '" + username + "'";
-        ResultSet view = stmt.executeQuery(sql_view_miles);
-          if(view.next()){
+  
+      switch (action_choice.toLowerCase()) {
+        case "view": {
+          System.out.println("Please enter username:\n");
+          username = sc.nextLine();
+          String sql_view_miles = "SELECT * FROM miles WHERE user_name = '" + username + "'";
+          ResultSet view = stmt.executeQuery(sql_view_miles);
+          if (view.next()) {
             System.out.println(view.getString("user_name"));
             System.out.println(view.getString("Total_Miles"));
           }
+          break;
         }
-  
-      else if(action_choice.toLowerCase().equals("add")){
-        System.out.println("Please enter username:\n");
-        username = sc.nextLine();
-        String sql_view_miles = "SELECT * FROM miles WHERE user_name = '" + username + "'";
-        ResultSet rs_view = stmt.executeQuery(sql_view_miles);
-        if(rs_view.next()){
-          System.out.println(rs_view.getString("user_name"));
-          System.out.println(rs_view.getString("Total_Miles"));
-          System.out.println("Amount of miles to be added:\n");
-          miles_to_add = sc.nextInt();
-          
-          String sql_miles_to_add = "UPDATE `accounts`.`miles` SET `Total_Miles`" +
-                                            " = Total_Miles + '" + miles_to_add + "'";
-          stmt.executeUpdate(sql_miles_to_add);
-          String sql_view_miles2 = "SELECT * FROM miles WHERE user_name = '" + username + "'";
-          ResultSet rs_view2 = stmt.executeQuery(sql_view_miles2);
-          rs_view2.next();
-          System.out.println(rs_view2.getString("user_name"));
-          System.out.println("New total miles for user " + rs_view2.getString("user_name") + " is" +
-                                     ":" + rs_view2.getString("Total_Miles"));
+        case "add": {
+          System.out.println("Please enter username:\n");
+          username = sc.nextLine();
+          String sql_view_miles = "SELECT * FROM miles WHERE user_name = '" + username + "'";
+          ResultSet rs_view = stmt.executeQuery(sql_view_miles);
+          if (rs_view.next()) {
+            System.out.println(rs_view.getString("user_name"));
+            System.out.println(rs_view.getString("Total_Miles"));
+            System.out.println("Amount of miles to be added:\n");
+            miles_to_add = sc.nextInt();
+        
+            String sql_miles_to_add = "UPDATE `accounts`.`miles` SET `Total_Miles`" +
+                                              " = Total_Miles + '" + miles_to_add + "'";
+            stmt.executeUpdate(sql_miles_to_add);
+            String sql_view_miles2 = "SELECT * FROM miles WHERE user_name = '" + username + "'";
+            ResultSet rs_view2 = stmt.executeQuery(sql_view_miles2);
+            rs_view2.next();
+            System.out.println(rs_view2.getString("user_name"));
+            System.out.println("New total miles for user " + rs_view2.getString("user_name") + " is" +
+                                       ":" + rs_view2.getString("Total_Miles"));
+          }
+          break;
         }
-      }
-  
-      else if(action_choice.toLowerCase().equals("withdraw")){
-        System.out.println("Please enter username:\n");
-        username = sc.nextLine();
-        String sql_view_miles = "SELECT * FROM miles WHERE user_name = '" + username + "'";
-        ResultSet rs_view = stmt.executeQuery(sql_view_miles);
-        if(rs_view.next()){
-          System.out.println(rs_view.getString("user_name"));
-          System.out.println(rs_view.getString("Total_Miles"));
-          System.out.println("Amount of miles to be removed:\n");
-          miles_to_subtract = sc.nextInt();
-          
-          String sql_miles_to_subtract = "UPDATE `accounts`.`miles` SET `Total_Miles`" +
-                                            " = Total_Miles - '" + miles_to_subtract + "'";
-          stmt.executeUpdate(sql_miles_to_subtract);
-          String sql_view_miles2 = "SELECT * FROM miles WHERE user_name = '" + username + "'";
-          ResultSet rs_view2 = stmt.executeQuery(sql_view_miles2);
-          rs_view2.next();
-          System.out.println(rs_view2.getString("user_name"));
-          System.out.println("New total miles for user " + rs_view2.getString("user_name") + " is" +
-                                     ":" + rs_view2.getString("Total_Miles"));
+        case "withdraw": {
+          System.out.println("Please enter username:\n");
+          username = sc.nextLine();
+          String sql_view_miles = "SELECT * FROM miles WHERE user_name = '" + username + "'";
+          ResultSet rs_view = stmt.executeQuery(sql_view_miles);
+          if (rs_view.next()) {
+            System.out.println(rs_view.getString("user_name"));
+            System.out.println(rs_view.getString("Total_Miles"));
+            System.out.println("Amount of miles to be removed:\n");
+            miles_to_subtract = sc.nextInt();
+        
+            String sql_miles_to_subtract = "UPDATE `accounts`.`miles` SET `Total_Miles`" +
+                                                   " = Total_Miles - '" + miles_to_subtract + "'";
+            stmt.executeUpdate(sql_miles_to_subtract);
+            String sql_view_miles2 = "SELECT * FROM miles WHERE user_name = '" + username + "'";
+            ResultSet rs_view2 = stmt.executeQuery(sql_view_miles2);
+            rs_view2.next();
+            System.out.println(rs_view2.getString("user_name"));
+            System.out.println("New total miles for user " + rs_view2.getString("user_name") + " is" +
+                                       ":" + rs_view2.getString("Total_Miles"));
+          }
+          break;
         }
-      }
-      
-      else{
-        System.out.println("Invalid choice or input");
+        default:
+          System.out.println("Invalid choice or input");
+          break;
       }
       
     } catch (Exception e){
